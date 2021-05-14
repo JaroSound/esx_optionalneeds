@@ -9,6 +9,11 @@ Citizen.CreateThread(function()
   end
 end)
 
+RegisterNetEvent('esx:playerLoaded')
+AddEventHandler('esx:playerLoaded', function(xPlayer)
+  PlayerData = xPlayer
+end)
+
 function Drunk(level, start)
   
   Citizen.CreateThread(function()
@@ -163,3 +168,16 @@ AddEventHandler('esx_optionalneeds:onDrink', function()
   ClearPedTasksImmediately(playerPed)
 
 end)
+
+RegisterNetEvent('esx_cigarette:startSmoke')
+AddEventHandler('esx_cigarette:startSmoke', function(source)
+	SmokeAnimation()
+end)
+
+function SmokeAnimation()
+	local playerPed = GetPlayerPed(-1)
+	
+	Citizen.CreateThread(function()
+        TaskStartScenarioInPlace(playerPed, "WORLD_HUMAN_SMOKING", 0, true)               
+	end)
+end
